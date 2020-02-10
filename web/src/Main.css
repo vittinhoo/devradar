@@ -19,6 +19,19 @@ li.dev-item {
     border-radius: 6px;
     box-shadow: 0 0 14px 0 rgba(0, 0, 0, .02);
     padding: 20px;
+    position: relative;
+}
+
+li.dev-item .dev-item__remove {
+    border-radius: 6px;
+    color: #dd0202;
+    cursor: pointer;
+    font-size: 14px;
+    line-height: 1;
+    right: 0;
+    top: 0;
+    padding: 10px;
+    position: absolute;
 }
 
 li.dev-item header {

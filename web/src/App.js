@@ -63,6 +63,12 @@ function App() {
 		setDevs([...devs, response.data]);
 	}
 
+	async function handleDeleteDev(_id) {
+		const response = await api.delete('/devs', { _id });
+
+		console.log(response);
+	}
+
 	return (
 		<div id="app">
 			<aside>
@@ -124,6 +130,7 @@ function App() {
 				<ul>
 					{devs.map(dev => (
 						<li key={dev._id} className="dev-item">
+							<span className="dev-item__remove" onClick={() => handleDeleteDev(dev._id)}>X</span>
 							<header>
 								<img src={dev.avatar_url} alt={dev.name}/>
 								<div className="user-info">

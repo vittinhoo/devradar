@@ -41,11 +41,21 @@ module.exports = {
         return response.json(dev);
     },
 
-    async update() {
+    async update(request, response) {
+        const { _id } = request.params;
 
+        let dev = await Dev.deleteOne({ _id });
+
+        return response.json(dev);
     },
 
-    async destroy() {
+    async destroy(request, response) {
+        const { _id } = request.query;
 
+        console.log('params', request.params);
+
+        let dev = await Dev.deleteOne({ _id });
+
+        //return response.json(dev);
     },
 }
