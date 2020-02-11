@@ -28,12 +28,8 @@ function App() {
 				setLatitude(latitude);
 				setLongitude(longitude);
 			},
-			(err) => {
-				console.log(err);
-			},
-			{
-				timeout: 30000,
-			}
+			(err) => { console.log(err); },
+			{ timeout: 30000, }
 		);
 	}, []);
 
@@ -64,9 +60,11 @@ function App() {
 	}
 
 	async function handleDeleteDev(_id) {
-		const response = await api.delete('/devs', { _id });
+		const response = await api.delete('/devs', {
+			data: { _id }
+		});
 
-		console.log(response);
+		console.log('resposta', response);
 	}
 
 	return (
