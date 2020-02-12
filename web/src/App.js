@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import api from './services/api';
 
+import { PulseLoader } from "react-spinners";
+
 import './global.css';
 import './App.css';
 import './Sidebar.css';
@@ -18,7 +20,9 @@ function App() {
 		[github_username, setGithubUsername] = useState(''),
 		[techs, setTechs] = useState(''),
 		[latitude, setLatitude] = useState(''),
-		[longitude, setLongitude] = useState('');
+		[longitude, setLongitude] = useState(''),
+		[buttonLoading, setbuttonLoading] = useState(false),
+		[buttonMessage, setbuttonMessage] = useState('Salvar');
 
 	useEffect(() => {
 		navigator.geolocation.getCurrentPosition(
@@ -41,10 +45,12 @@ function App() {
 		};	
 
 		loadDevs();
-	}, []);
+	}, [devs]);
 
 	async function handleAddDev(e) {
 		e.preventDefault();
+		setbuttonLoading(true);
+		setbuttonMessage('');
 
 		const response = await api.post('/devs', {
 			github_username,
@@ -55,16 +61,18 @@ function App() {
 
 		setGithubUsername('');
 		setTechs('');
+		setbuttonLoading(false);
+		setbuttonMessage('Salvar');
 
 		setDevs([...devs, response.data]);
 	}
 
 	async function handleDeleteDev(_id) {
-		const response = await api.delete('/devs', {
-			data: { _id }
-		});
+		await api.delete('/devs', { data: { _id } });
 
-		console.log('resposta', response);
+		return devs.filter((elem) => {
+			return elem._id !== _id;
+		});
 	}
 
 	return (
@@ -120,7 +128,15 @@ function App() {
 						</div>
 					</div>
 
-					<button type="submit">Salvar</button>
+					<button type="submit">
+						<PulseLoader 
+							className="loading-icon" 
+							loading={buttonLoading}
+							color={"#FFF"}
+							size={10}
+						/>
+						{buttonMessage}
+					</button>
 				</form>
 			</aside>
 

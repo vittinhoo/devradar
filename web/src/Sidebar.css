@@ -59,3 +59,7 @@ aside form button[type="submit"] {
 aside form button[type="submit"]:hover {
     background: #6931ca;
 }
+
+aside form button[type="submit"] .loading-icon {
+    position: absolute;
+}
