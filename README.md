@@ -7,3 +7,4 @@
 - Case sensitive nas tecnologias
 - Tela de carregamento
 - Push Notification quando um dev novo for cadastrado
+- Arrumar filtro (quando pesquisa por mais de uma tech ele não filtra mostra sempre a primeira tech)
